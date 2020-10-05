@@ -51,7 +51,7 @@ export default class StarrClient extends Client {
         Constants.DefaultOptions.ws.properties.$browser = "Discord iOS";
         this.login(this.getToken());
         import("../../database/database"); // Startup the database connection
-        CommandHandler.load("./src/commands", ["general"], this); // Execute both to initialize the commands and events
-        EventHandler.load("./src/events", this);
+        CommandHandler.load("./bot/src/commands", ["general"], this); // Execute both to initialize the commands and events
+        EventHandler.load("./bot/src/events", this);
     }
 }

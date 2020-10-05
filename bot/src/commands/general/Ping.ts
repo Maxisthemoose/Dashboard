@@ -14,6 +14,6 @@ export default class Ping extends BaseCommand {
         });
     }
     async run (client: StarrClient, message: Message, args: string[]): Promise<any> {
-        
+        message.channel.send("Pong!");
     }
 }
