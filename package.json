@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "backend": "nodemon --exec ts-node backend/app.ts",
+    "frontend": "cd .\\frontend && npm start",
+    "bot": "nodemon --exec ts-node bot/src/index.ts",
+    "start": "concurrently \"npm:backend\" \"npm:frontend\" \"npm:bot\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "concurrently": "^5.3.0"
-  }
+  "dependencies": {}
 }
