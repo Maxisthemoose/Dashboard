@@ -1,7 +1,6 @@
 import { Guild } from "discord.js";
 import StarrClient from "../util/structures/BaseClient";
 import BaseEvent from "../util/structures/BaseEvent";
-import Gld from "../database/Models/Guild";
 
 export default class GuildCreate extends BaseEvent {
     constructor() {

@@ -1,6 +1,5 @@
 import { Client, Snowflake, Guild, Channel, ClientOptions, Constants } from "discord.js"
 import BaseClientInfo from "../interfaces/BaseClientInfo";
-import GuildDoc from "../../database/models/Guild";
 import SnipeData from "../interfaces/SnipeData";
 import CommandHandler from "../../handlers/CommandHandler"; // Import the command handler
 import EventHandler from "../../handlers/EventHandler"; // Import the event handler
@@ -36,11 +35,9 @@ export default class StarrClient extends Client {
         return process.env.TOKEN;
     }
 
-    public async getDBGuildPrefix(guild: Guild): Promise<string> {
-        const foundGuild = await GuildDoc.findOne({ id: guild.id });
-        if (!foundGuild) return null;
-        const guildPrefix = foundGuild.prefix;
-        return guildPrefix;
+    public async getDBGuildPrefix(guild: Guild) {
+
+
     }
     public getSnipe(client: StarrClient, guild: Guild, channel: Channel): SnipeData {
         const toget = JSON.stringify({ guild: guild.id, channel: channel.id });
@@ -50,7 +47,6 @@ export default class StarrClient extends Client {
     public start(): void {
         Constants.DefaultOptions.ws.properties.$browser = "Discord iOS";
         this.login(this.getToken());
-        import("../../database/database"); // Startup the database connection
         CommandHandler.load("./bot/src/commands", ["general"], this); // Execute both to initialize the commands and events
         EventHandler.load("./bot/src/events", this);
     }

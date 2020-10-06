@@ -5,11 +5,14 @@ const router = Router();
 router.get("/", passport.authenticate("discord"))
 
 router.get("/redirect", passport.authenticate("discord"), (req, res) => {
-    res.json({ message: "Success" });
+    res.redirect("http://localhost:3000/menu");
 });
 
 router.get("/get", (req, res) => {
-    res.send(req.user);
+    if (req.user)
+        res.send(req.user);
+    else
+        res.status(401).json({ message: "Unauthorized" });
 });
 
 
