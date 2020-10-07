@@ -15,6 +15,7 @@ export default class Ready extends BaseEvent {
             const { data } = await getConfig(guild.id);
             const prefix = data.prefix;
             client.cachedPrefixes.set(guild.id, prefix);
+            console.log(`Cached prefix: ${prefix}, for guild: ${guild.name}`);
         }
     }
 }

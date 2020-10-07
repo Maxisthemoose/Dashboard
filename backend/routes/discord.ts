@@ -5,8 +5,7 @@ import { getGuilds } from "../utils/api";
 import User from "../database/Models/User";
 import { checkGuilds } from "../utils/utils";
 import Guild from "../database/Models/Guild";
-
-
+import { WebSocket } from "../WebSocket";
 router.get("/guilds", async (req, res) => {
     const guilds = await getGuilds();
     const user = await User.findOne({ userId: req.user.userId });
@@ -40,7 +39,9 @@ router.put("/guilds/:guildId/prefix", async (req, res) => {
     } catch (err) {
         return res.status(500).json({ "message": "Something went wrong." });
     }
-    console.log(guild.prefix);
+
+    const socket = WebSocket.getSocket();
+    socket.emit("prefix-update", guildId, prefix);
     return res.status(200).json({ prefix, message: "Success" });
 });
 

@@ -3,7 +3,8 @@ import BaseClientInfo from "../interfaces/BaseClientInfo";
 import SnipeData from "../interfaces/SnipeData";
 import CommandHandler from "../../handlers/CommandHandler"; // Import the command handler
 import EventHandler from "../../handlers/EventHandler"; // Import the event handler
-import { config } from "dotenv"; // Import config for environment variables
+import { connect } from "socket.io-client";
+const socket = connect("http://localhost:3001");
 
 export default class StarrClient extends Client {
     defaultPrefix: string;
@@ -29,6 +30,10 @@ export default class StarrClient extends Client {
         this.colors = {
             noColor: "#2F3136",
         }
+
+        socket.on("prefix-update", (guildId: string, data: string) => {
+            this.cachedPrefixes.set(guildId, data);
+        });
     };
 
     private getToken(): string | undefined {

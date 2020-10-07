@@ -9,4 +9,7 @@ const BaseClient = new Client({
         partials: ["MESSAGE", "REACTION"] 
     } 
 });
+
+
+
 BaseClient.start(); // Start the client
